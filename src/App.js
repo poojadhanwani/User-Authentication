@@ -20,7 +20,6 @@ export default function App() {
               <Switch>
                 <Route exact path="/" component={Login} />
                 <Route path="/signup" component={Signup} />
-                <Route path="/login" component={Login} />
                 <Route path="/welcome" component={Welcome} />
               </Switch>
             </AuthProvider>

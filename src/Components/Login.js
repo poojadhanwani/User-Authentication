@@ -18,7 +18,6 @@ const Login = () => {
   const [pass, setPass] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  //const store = [];
   const history = useHistory();
 
   async function handleSubmit(event) {
@@ -31,14 +30,15 @@ const Login = () => {
     } catch (error) {
       var errorCode = error.code;
       var failedAttempts = 0;
-      // var errorMessage = error.message;
-      console.log(errorCode);
-      if (errorCode == "auth/wrong-password") {
-        //store.push(email);
+      if (errorCode === "auth/wrong-password") {
         failedAttempts++;
-        console.log(`failed attempts:${failedAttempts}`);
-      }
-      if (failedAttempts > 3) {
+        if (failedAttempts > 3) {
+          setError("Your Account is Locked!");
+        } else {
+          setError("Failed to Log In!");
+        }
+        //  console.log(`failed attempts:${failedAttempts} `);
+      } else if (errorCode === "auth/too-many-requests") {
         setError("Your Account is Locked!");
       } else {
         setError("Failed to Log In!");
